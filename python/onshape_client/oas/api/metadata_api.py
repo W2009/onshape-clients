@@ -1051,8 +1051,9 @@ class MetadataApi(object):
                 "collection_format_map": {},
             },
             headers_map={
-                "accept": ["application/vnd.onshape.v1+json;charset=UTF-8;qs=0.1"],
-                "content_type": ["application/json;charset=UTF-8; qs=0.09"],
+                "accept": ["application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2"],
+                "content_type": ["application/json;charset=UTF-8"],
+                "host": ["cad.onshape.com"],
             },
             api_client=api_client,
             callable=__update_wv_metadata,

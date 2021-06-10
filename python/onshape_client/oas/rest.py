@@ -290,13 +290,24 @@ class RESTClientObject(object):
 
         if r.status == 403 or r.status == 401:
             from onshape_client.client import get_client
-
+            print("tutaj")
             client = get_client()
             if client.get_authentication_method() == "oauth":
                 client.do_oauth_flow()
                 headers["Authorization"] = "Bearer {}".format(
                     client.configuration.access_token
                 )
+                ret=self.request(
+                    method,
+                    url,
+                    query_params=query_params,
+                    headers=headers,
+                    body=body,
+                    post_params=post_params,
+                    _preload_content=_preload_content,
+                    _request_timeout=_request_timeout,
+                )
+                print("ret"+str(ret))
                 return self.request(
                     method,
                     url,
@@ -321,6 +332,14 @@ class RESTClientObject(object):
         _preload_content=True,
         _request_timeout=None,
     ):
+        print("============REST======")
+        print("GET")
+        print("url:"+url)
+        print("headers"+str(headers))
+        print("query_params:"+str(query_params))
+        #print("post_params"+str(post_params))
+        #print("body"+str(body))    
+    
         return self.request(
             "GET",
             url,
@@ -397,6 +416,14 @@ class RESTClientObject(object):
         _preload_content=True,
         _request_timeout=None,
     ):
+        print("============REST======")
+        print("POST")
+        print("url:"+url)
+        print("headers"+str(headers))
+        print("query_params:"+str(query_params))
+        print("post_params"+str(post_params))
+        print("body"+str(body))
+        
         return self.request(
             "POST",
             url,
