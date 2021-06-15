@@ -154,7 +154,7 @@ class Client:
             (that includes the authorization code!)
         """
         
-        prnt("FILE:"+keys_file)
+        print("FILE:"+keys_file)
         if Client.singleton_instance:
             warnings.warn(
                 "A Client was already created so this will create another and override it. Please use "
