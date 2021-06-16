@@ -151,6 +151,7 @@ class RESTClientObject(object):
         post_params = post_params or {}
         headers = headers or {}
 
+        print("%%%%%%%%% REST %%%%%%%%%")
         timeout = None
         if _request_timeout:
             if isinstance(
@@ -185,7 +186,15 @@ class RESTClientObject(object):
                 if re.search("json", headers["Content-Type"], re.IGNORECASE):
                     request_body = None
                     if body is not None:
-                        request_body = json.dumps(body)
+                        #request_body = json.dumps(body)
+                        request_body=body
+                        print("^^^^^")
+                        print(request_body)
+                        print(method)
+                        print(headers)
+                        print(url)
+                        print(_preload_content)
+                        print("^^^^^")
                     r = self.pool_manager.request(
                         method,
                         url,
@@ -194,6 +203,7 @@ class RESTClientObject(object):
                         timeout=timeout,
                         headers=headers,
                     )
+
                 elif (
                     headers["Content-Type"] == "application/x-www-form-urlencoded"
                 ):  # noqa: E501
@@ -265,6 +275,8 @@ class RESTClientObject(object):
 
             # log response body
             logger.debug("response body: %s", r.data)
+
+        print("response body: %s", r.status)
 
         # TODO: Handle redirections
         # Ethan added the below clause to handle redirects correctly:
@@ -338,8 +350,8 @@ class RESTClientObject(object):
         print("headers"+str(headers))
         print("query_params:"+str(query_params))
         #print("post_params"+str(post_params))
-        #print("body"+str(body))    
-    
+        #print("body"+str(body))
+
         return self.request(
             "GET",
             url,
@@ -423,7 +435,7 @@ class RESTClientObject(object):
         print("query_params:"+str(query_params))
         print("post_params"+str(post_params))
         print("body"+str(body))
-        
+
         return self.request(
             "POST",
             url,

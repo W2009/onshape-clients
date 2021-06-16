@@ -364,11 +364,11 @@ class MetadataApi(object):
             kwargs["wvm"] = wvm
             kwargs["wvmid"] = wvmid
             kwargs["eid"] = eid
-            
+
             #a = self.call_with_http_info(**kwargs)
             #print("aaaaa")
             #print(a)
-            
+
             return self.call_with_http_info(**kwargs)
 
         self.get_wmve_metadata = Endpoint(
@@ -1051,9 +1051,10 @@ class MetadataApi(object):
                 "collection_format_map": {},
             },
             headers_map={
-                "accept": ["application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2"],
+                "accept": ["application/vnd.onshape.v1+json;charset=UTF-8;qs=0.2"],
                 "content_type": ["application/json;charset=UTF-8"],
                 "host": ["cad.onshape.com"],
+                "Cache-Control": ["no-cache"]
             },
             api_client=api_client,
             callable=__update_wv_metadata,
@@ -1514,8 +1515,15 @@ class Endpoint(object):
                 content_type_headers_list
             )
             params["header"]["Content-Type"] = header_list
-            
-            
+        params["header"]["Cache-Control"]="no-cache"
+
+        if params["body"]:
+            params["header"]["Content-Length"]=str(len(params["body"]))
+            pass
+
+
+
+
         b= self.api_client.call_api(
             self.settings["endpoint_path"],
             self.settings["http_method"],
@@ -1534,10 +1542,10 @@ class Endpoint(object):
             _request_timeout=kwargs["_request_timeout"],
             _host=_host,
             collection_formats=params["collection_format"],
-        )   
-            
-        #print("bbbb")    
-        #print(str(b))   
+        )
+
+        #print("bbbb")
+        #print(str(b))
 
         return self.api_client.call_api(
             self.settings["endpoint_path"],

@@ -153,7 +153,7 @@ class Client:
             call client.set_grant_authorization_url_response(redirected_url) with whatever url the user got directed to
             (that includes the authorization code!)
         """
-        
+
         print("FILE:"+keys_file)
         if Client.singleton_instance:
             warnings.warn(
@@ -220,6 +220,7 @@ class Client:
                     "You need to have the user authorize the grant."
                 )
             elif authorization_method == OAuthAuthorizationMethods.LOCALHOST_SERVER:
+                #print(str(self.fetch_access_token))
                 start_server(self.fetch_access_token, self.open_authorize_grant)
             elif authorization_method == OAuthAuthorizationMethods.PYTHON_CALLBACK:
                 self.open_authorize_grant()

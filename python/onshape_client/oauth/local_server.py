@@ -30,7 +30,8 @@ def MakeHandlerWithCallbacks(authorization_callback):
             try:
                 # Say we are at an https port so that OAuth package doesn't complain. This isn't a security concern because
                 # it is just so that the authorization code is correctly parsed.
-                authorization_callback("https://localhost" + self.path)
+                print(self.path)
+                authorization_callback(authorization_response="https://localhost" + self.path)
                 self.send_response(200)
                 self.send_header("Content-type", "text/html")
                 self.end_headers()
