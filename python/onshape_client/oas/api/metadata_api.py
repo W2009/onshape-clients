@@ -1014,6 +1014,9 @@ class MetadataApi(object):
             kwargs["wv"] = wv
             kwargs["wvid"] = wvid
             kwargs["body"] = body
+
+            app.logger.info("META: {}".format(body))
+
             return self.call_with_http_info(**kwargs)
 
         self.update_wv_metadata = Endpoint(
@@ -1566,3 +1569,8 @@ class Endpoint(object):
             _host=_host,
             collection_formats=params["collection_format"],
         )
+
+if __name__ != '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)

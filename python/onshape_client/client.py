@@ -313,6 +313,9 @@ class Client:
         :return: The access token and the refresh token. These should be stored by the caller to facilitate future
         client initialization.
         """
+        print("jestem tutaj")
+
+        print(self.token_uri)
         try:
             token_response = self.oauth.fetch_token(
                 self.token_uri, client_secret=self.client_secret, **kwargs
